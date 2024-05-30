@@ -22,7 +22,7 @@ origin	https://gitlab.cs.umd.edu/cmsc335Summer2024/cmsc335-<your-directory-id>.g
 ```  
 `origin` is the label given to the url that points to your repository running on the universitry gitlab server. There is direct connection between your repository on your local machine and the repository that `origin` points to. Your repository is private and can only be viewed by yourself and members of the teaching staff. It is where you will do all of your coding and where you submit your work by comitting and pushing those changes to your `origin`. So how will you get your assignments as they are released?  
 4.  From inside of your repository directory, run the following command:  
-`git remote add upstream https://gitlab.cs.umd.edu/cmsc335Summer2023/cmsc335-student.git`. Once that is complete run `git remote -v` again. You should see the following output:  
+`git remote add upstream https://gitlab.cs.umd.edu/cmsc335Summer2024/cmsc335-student.git`. Once that is complete run `git remote -v` again. You should see the following output:  
 ```
 origin	https://gitlab.cs.umd.edu/cmsc335Summer2024/cmsc335-<your-directory-id>.git (fetch)
 origin	https://gitlab.cs.umd.edu/cmsc335Summer2024/cmsc335-<your-directory-id>.git (push)
