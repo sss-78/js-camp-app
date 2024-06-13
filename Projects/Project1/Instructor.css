@@ -1,0 +1,12 @@
+body {
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwallpapercave.com%2Fwp%2FntYEFqo.jpg&f=1&nofb=1&ipt=1e58d8d275e0f160938f25a047345d52ac699215538d0fe45b970b7372c50a85&ipo=images");
+    color: rgb(236, 236, 16);
+    font-family: "Shadows Into Light", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+table, th, td {
+    border: 1px solid;
+}
