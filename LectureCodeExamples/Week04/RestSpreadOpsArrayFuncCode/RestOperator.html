@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Rest Operator Example</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      partyInfo("FirstParty", "Ali", "Theresa", "Arushi");
+      document.writeln("<br>*****<br>");
+      partyInfo("SecondParty", "Josh", "Trenton");
+      function partyInfo(partyName, host, ...guests) {
+        document.writeln(`Party name: ${partyName}, Host: ${host}<br>`);
+        document.writeln(`Guests: ${guests}`);
+      }
+    </script>
+  </body>
+</html>
