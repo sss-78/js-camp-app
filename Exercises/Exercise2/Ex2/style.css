@@ -1,1 +1,8 @@
 /* place all of your css here */
+body {
+    background-color: green;
+}
+
+#linker {
+    color: blue;
+}
