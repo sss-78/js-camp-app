@@ -1,0 +1,24 @@
+# Start with the Nginx Alpine image
+FROM nginx:alpine
+
+# Install PHP and PHP-FPM on Alpine
+RUN apk add --no-cache php7 php7-fpm php7-opcache
+
+# Configure Nginx and PHP
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY www.conf /etc/php7/php-fpm.d/www.conf
+
+# Set the working directory to Nginx's root directory
+WORKDIR /usr/share/nginx/html
+
+# Copy the entire project directory into the container
+COPY ./Ex2 /usr/share/nginx/html
+
+# Expose port 8080
+EXPOSE 3000
+
+# Make sure files are owned by the Nginx user
+RUN chown -R nginx:nginx /usr/share/nginx/html
+
+# Start PHP-FPM and Nginx when the container starts
+CMD php-fpm7 && nginx -g "daemon off;"
