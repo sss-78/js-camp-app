@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!--#include virtual="footer.shtml" -->
     <div id="mainContainer">
         <h1><span>Enter New Contact</span></h1>
         <form action="processing/contactProcessing.php" method="post">
