@@ -1,1 +1,146 @@
-/* You implement */
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("./images/JimHenson.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    border: 0.5rem solid green;
+}
+
+#main-title {
+    color: white;
+    font-size: 80px;
+    margin-top: 0%;
+}
+
+#main-title span {
+    background-color: rgb(0, 0, 0, .4);
+}
+
+#links {
+    margin-left: 35%;
+    margin-top: 20%;
+    margin-right: 30%;
+    padding-left: 7.5%;
+    background-color: gray;
+    border: 0.5rem solid;
+}
+
+#links a {
+    color: white;
+    font-size: 40px;
+}
+
+footer {
+    margin-top: 14.4%;
+    margin-right: -0.5%;
+    margin-left: -0.5%;
+    background-color: red;
+    border: 4mm ridge lightgrey;
+    padding-top: 1%;
+    padding-left: 25%;
+    padding-bottom: 1%;
+}
+
+footer:hover a {
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: white;
+    font-size: 40px;
+}
+
+#catalog-info {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 0.5rem solid white;
+    margin-left: 5%;
+    margin-right: 40%;
+    margin-bottom: 5%;
+}
+
+#catalog-info label {
+    font-size: 40px;
+}
+
+#item-choice:focus {
+    border: 0.2rem solid red;
+}
+
+#maximumCost {
+    border: 0.2rem solid red;
+}
+
+#info {
+    padding-right: 10%;
+    padding-bottom: 10%;
+}
+
+#submit-inquiry {
+    border: thick double black;
+    padding: 1.5%;
+    border-radius: 7px
+}
+
+#clear {
+    border: thick double black;
+    padding: 1.5%;  
+    border-radius: 7px 
+}
+
+
+
+#catalog-info1 {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 0.5rem solid white;
+    margin-left: 5%;
+    margin-right: 33%;
+    margin-bottom: 24%;
+}
+
+#catalog-info1 label{
+    font-size: 40px;
+}
+
+#serialNumber:focus {
+    border: 0.2rem solid red;
+}
+
+#cc1 {
+    border: 0.2rem solid red;
+}
+
+#cc2 {
+    border: 0.2rem solid red;
+}
+
+#cc3 {
+    border: 0.2rem solid red;
+}
+
+#cc4 {
+    border: 0.2rem solid red;
+}
+
+#shipping {
+    border: 0.2rem solid red;
+}
+
+#email {
+    border: 0.2rem solid red;
+}
+
+#submit-order {
+    border: thick double black;
+    padding: 1.5%;
+    border-radius: 7px
+}
+
+#clear1 {
+    border: thick double black;
+    padding: 1.5%;  
+    border-radius: 7px 
+}

@@ -1,1 +1,44 @@
 <!-- You implement -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placing Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 id="main-title"><span><u>Placing Order</u></span></h1>
+
+    <form action="processing/placingOrder.php" method="post">
+        <div id="catalog-info1">
+
+            <label><u>Item Serial #</u></label>
+            <input type="text" name="serialNumber" id="serialNumber" placeholder="umd-item-0000" required><br>
+
+            <label>Credit Card #</label>
+            <input type="text" name="cc1" id="cc1" maxlength="4">
+            - 
+            <input type="text" name="cc2" id="cc2" maxlength="4">
+            - 
+            <input type="text" name="cc3" id="cc3" maxlength="4">
+            - 
+            <input type="text" name="cc4" id="cc4" maxlength="4">
+            <br>
+
+            <label>Shipping Address</label>
+            <input type="text" name="shipping" id="shipping" maxlength="80"><br>
+
+            <label><u>Contact Email Address:</u></label>
+            <input type="email" name="email" id="email" placeholder="example@terpmail.umd.edu"><br>
+
+            <input type="submit" name="submit-order" id="submit-order" value="Submit Order">
+            <input type="reset" name="clear1" id="clear1" value="Clear">
+        </div>
+         <!--#include virtual="footer.shtml" -->
+    </form>
+</body>
+
+</html>
