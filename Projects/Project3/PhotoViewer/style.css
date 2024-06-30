@@ -1,0 +1,30 @@
+#main-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: thick double black;
+}
+
+#status {
+    border: solid black;
+}
+
+#status-text {
+    color: red;
+}
+
+#local-folder {
+    border: solid black;
+}
+
+#json-file {
+    border: solid black;
+}
+
+#iterating {
+    border: solid black;
+}
+
+#slideshows {
+    border: solid black;
+}

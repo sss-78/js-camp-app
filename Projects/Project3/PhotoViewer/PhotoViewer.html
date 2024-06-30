@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="main">
+    <h1><u>Photo Viewer</u></h1>
+    <img id = "main-img" src="InitialImage.jpg" alt="Base Image"><br>
+    <form>
+    <fieldset id="status">
+        <legend><em>Status</em></legend><br><br>
+
+        <label>Photo being displayed:</label>
+        <input type="text" name="textbox" id="textbox" disabled="true">
+        
+        <div id="status-text"></div>
+    </fieldset>
+    <br>
+
+    <fieldset id="local-folder">
+        <legend><em>Loading Images(Local Folder)</em></legend><br><br>
+        
+        <label>Photos' Folder</label>
+        <input type="text" name="textbox1" id="textbox1">
+
+        <label>Common Name:</label>
+        <input type="text" name="textbox2" id="textbox2"><br>
+
+        <label>Start Photo Number</label>
+        <input type="text" name="textbox3" id="textbox3">
+
+        <label>End Photo Number</label>
+        <input type="text" name="textbox4" id="textbox4"><br>
+
+        <input type="button" name="load-photos" id="load-photos" value="Load Photos">
+    </fieldset>
+    <br>
+
+    <fieldset id="json-file">
+        <legend><em>Loading Images(JSON File)</em></legend><br><br>
+
+        <label>URL:</label>
+        <input type="text" name="textbox5" id="textbox5">
+        
+        <input type="button" name="load-JSON" id="load-JSON" value="Load JSON">
+    </fieldset>
+    <br>
+
+    <fieldset id="iterating">
+        <legend><em>Iterating</em></legend><br><br>
+        
+        <input type="button" name="Previous-Photo" id="Previous-Photo" value="Previous Photo">
+        <input type="button" name="Next-Photo" id="Next-Photo" value="Next Photo">
+        <input type="button" name="First-Photo" id="First-Photo" value="First Photo">
+        <input type="button" name="Last-Photo" id="Last-Photo" value="Last Photo">
+    </fieldset>
+    <br>
+
+    <fieldset id="slideshows">
+        <legend><em>SlideShows</em></legend><br><br>
+        
+        <input type="button" name="SlideShow" id="SlideShow" value="SlideShow">
+        <input type="button" name="RandomSlideShow" id="RandomSlideShow" value="RandomSlideShow">
+        <input type="button" name="StopSlideShow" id="StopSlideShow" value="StopSlideShow">
+    </fieldset>
+    <br>
+
+    <input type="reset" name="Reset-Form-Values" id="Reset-Form-Values" value="Reset Form Values">
+    </form>
+    <script src="code.js"></script>
+
+
+</body>
+
+
+</html>
