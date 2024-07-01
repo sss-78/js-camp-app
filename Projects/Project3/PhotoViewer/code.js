@@ -1,9 +1,9 @@
 let photosFolder = ""
 let commonName = ""
-let startPhotoNumber = 0
-let endPhotoNumber = 0
-let currentPhotoNumber = 0
-let pathName = `${photosFolder}/${commonName}${currentPhotoNumber}.jpg`
+let startPhotoNumber = -1
+let endPhotoNumber = -1
+let currentPhotoNumber = -1
+let pathName = "InitialImage.jpg"
 let refresh
 
 let jsonFiles = []
@@ -11,11 +11,13 @@ let currentJsonFile = 0
 let isImg = true
 
 function main() {
-    document.getElementById("load-photos").addEventListener("click", function() {
+    document.getElementById("textbox").value = pathName
+    /* LAMBDA */
+    document.getElementById("load-photos").addEventListener("click", () => {
         isImg = true 
         loadImage()}
         )
-    document.getElementById("load-JSON").addEventListener("click", function() {
+    document.getElementById("load-JSON").addEventListener("click", () => {
         isImg = false
         loadJSON()}
         )
@@ -28,7 +30,27 @@ function main() {
     document.getElementById("SlideShow").addEventListener("click", slideShow)
     document.getElementById("RandomSlideShow").addEventListener("click", randomSlideShow)
     document.getElementById("StopSlideShow").addEventListener("click", stopSlideShow)
+    document.getElementById("Reset-Form-Values").addEventListener("click", resetToDefault)
 }
+
+function resetToDefault() {
+    photosFolder = ""
+    commonName = ""
+    startPhotoNumber = -1
+    endPhotoNumber = -1
+    currentPhotoNumber = -1
+    pathName = "InitialImage.jpg"
+    refresh
+
+    jsonFiles = []
+    currentJsonFile = 0
+    isImg = true
+
+    document.getElementById("status-text").innerHTML = ""
+    document.getElementById("textbox").value = pathName
+    document.getElementById("main-img").src = pathName
+}
+
 
 function loader() {
     pathName = `${photosFolder}${commonName}${currentPhotoNumber}.jpg`
@@ -38,8 +60,15 @@ function loader() {
     document.getElementById("main-img").alt = "Path does not exist"
 }
 
-function loaderError() {
-    document.getElementById("status-text").innerHTML = "Error: Invalid Range"
+function loaderInputError() {
+    document.getElementById("textbox").value = pathName
+    document.getElementById("status-text").innerHTML = "Error: you must load data first"
+    document.getElementById("main-img").alt = "Path does not exist"
+}
+
+function loaderOutOfRangeError() {
+    document.getElementById("textbox").value = pathName
+    document.querySelector("#status-text").innerHTML = "Error: Invalid Range"
     document.getElementById("main-img").alt = "Path does not exist"
 }
 
@@ -48,9 +77,13 @@ function loadImage() {
     commonName = document.getElementById("textbox2").value
     startPhotoNumber = parseInt(document.getElementById("textbox3").value)
     endPhotoNumber = parseInt(document.getElementById("textbox4").value)
+    console.log(startPhotoNumber, endPhotoNumber)
 
-    if(startPhotoNumber > endPhotoNumber) {
-        loaderError()
+    if(photosFolder.length === 0 || commonName.length === 0 || 
+        Object.is(startPhotoNumber, NaN) || Object.is(endPhotoNumber, NaN)){
+            loaderInputError()
+    } else if(startPhotoNumber > endPhotoNumber) {
+        loaderOutOfRangeError()
     } else {
         currentPhotoNumber = startPhotoNumber
         loader()
@@ -58,12 +91,16 @@ function loadImage() {
 }
 
 function prevImg() {
-    if(currentPhotoNumber == startPhotoNumber){
-        currentPhotoNumber = endPhotoNumber  
-    } else{
-        currentPhotoNumber--;
+    if(isImg){
+        if(currentPhotoNumber == startPhotoNumber){
+            currentPhotoNumber = endPhotoNumber  
+        } else{
+            currentPhotoNumber--;
+        }
+        loader()
+    } else {
+        prevImgJ()
     }
-    loader()
 }
 
 function nextImg() {
@@ -108,7 +145,12 @@ function randomImg() {
 
 function slideShow() {
     if(isImg){
-        refresh = setInterval(nextImg, 1000)
+        if(photosFolder.length === 0 || commonName.length === 0 || 
+            Object.is(startPhotoNumber, NaN) || Object.is(endPhotoNumber, NaN)){
+                loaderInputError()
+        } else {
+            refresh = setInterval(nextImg, 1000)
+        }
     } else {
         slideShowJ()
     }
@@ -116,7 +158,12 @@ function slideShow() {
 
 function randomSlideShow() {
     if(isImg){
-        refresh = setInterval(randomImg, 1000)
+        if(photosFolder.length === 0 || commonName.length === 0 || 
+            Object.is(startPhotoNumber, NaN) || Object.is(endPhotoNumber, NaN)){
+                loaderInputError()
+        } else{
+            refresh = setInterval(randomImg, 1000)
+        }
     } else{
         randomSlideShowJ()
     }
