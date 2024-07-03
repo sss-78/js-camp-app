@@ -1,8 +1,8 @@
 let photosFolder = ""
 let commonName = ""
-let startPhotoNumber = -1
-let endPhotoNumber = -1
-let currentPhotoNumber = -1
+let startPhotoNumber = NaN
+let endPhotoNumber = NaN
+let currentPhotoNumber = NaN
 let pathName = "InitialImage.jpg"
 let refresh
 
@@ -36,9 +36,9 @@ function main() {
 function resetToDefault() {
     photosFolder = ""
     commonName = ""
-    startPhotoNumber = -1
-    endPhotoNumber = -1
-    currentPhotoNumber = -1
+    startPhotoNumber = NaN
+    endPhotoNumber = NaN
+    currentPhotoNumber = NaN
     pathName = "InitialImage.jpg"
     refresh
 
@@ -95,7 +95,7 @@ function prevImg() {
         if(currentPhotoNumber == startPhotoNumber){
             currentPhotoNumber = endPhotoNumber  
         } else{
-            currentPhotoNumber--;
+            currentPhotoNumber--
         }
         loader()
     } else {
@@ -105,12 +105,17 @@ function prevImg() {
 
 function nextImg() {
     if(isImg) {
-        if(currentPhotoNumber == endPhotoNumber){
-            currentPhotoNumber = startPhotoNumber  
-        } else{
-            currentPhotoNumber++;
+        if(photosFolder.length === 0 || commonName.length === 0 || 
+            Object.is(startPhotoNumber, NaN) || Object.is(endPhotoNumber, NaN)){
+                loaderInputError()
+        } else {
+            if(currentPhotoNumber == endPhotoNumber){
+                currentPhotoNumber = startPhotoNumber  
+            } else{
+                currentPhotoNumber++
+            }
+            loader()
         }
-        loader()
     } else {
         nextImgJ()
     }
@@ -136,7 +141,7 @@ function lastImg() {
 
 function randomImg() {
     if(isImg){
-        currentPhotoNumber = Math.floor((Math.random() * endPhotoNumber) + startPhotoNumber);
+        currentPhotoNumber = Math.floor((Math.random() * endPhotoNumber) + startPhotoNumber)
         loader()    
     } else{
         randomImgJ()
@@ -182,7 +187,7 @@ function loadJSON() {
 
     fetch(jsonFile)
     .then(response => {
-      return response.json();
+      return response.json()
     })
     .then((output) => {
         for (let prop in output.images) {
@@ -191,7 +196,7 @@ function loadJSON() {
         currentJsonFile = 0
         loaderJ()
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
 }
 
 function loaderJ() {
@@ -206,7 +211,7 @@ function prevImgJ() {
     if(currentJsonFile == 0){
         currentJsonFile = jsonFiles.length - 1
     } else{
-        currentJsonFile--;
+        currentJsonFile--
     }
     loaderJ()
 }
@@ -215,7 +220,7 @@ function nextImgJ() {
     if(currentJsonFile == jsonFiles.length - 1){
         currentJsonFile = 0
     } else{
-        currentJsonFile++;
+        currentJsonFile++
     }
     loaderJ()
 }
@@ -231,7 +236,7 @@ function lastImgJ() {
 }
 
 function randomImgJ() {
-    currentJsonFile = Math.floor((Math.random() * jsonFiles.length));
+    currentJsonFile = Math.floor((Math.random() * jsonFiles.length))
     loaderJ()
 }
 
@@ -247,4 +252,4 @@ function stopSlideShowJ() {
     clearInterval(refresh)
 }
 
-window.onload = main;
+window.onload = main
