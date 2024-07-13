@@ -47,15 +47,131 @@ You will need to define the following routes:
   res.status(201).json(data)  
   */
 
+
+const { query } = require('express');
 let express = require('express');
 let contactsRouter = express.Router();
+let Contact = require('/Users/saisreeramani/cmsc335sum/cmsc335-ssreeram/Exercises/Exercise3/InMemoryApi/models/contact.js')
 
 let contacts = [];
 
 /* Define your routes/endpoints here */
+
+function validateContactInfo(firstName, lastName, phoneNumber, email, id) {
+  return firstName.length <= 20 && lastName.length <= 20 && 
+  phoneNumber.charAt(3) === '-' && phoneNumber.charAt(7) == '-' && phoneNumber.length === 12 &&
+  email.charAt(4) == '@' && email.endsWith('.com') && email.length === 13 &&
+  !isNaN(id)
+}
+
+/* get /api/v1/contacts and /api/v1/contacts?firstName=Sally&lastName=Vance */
+contactsRouter.get('/', (req, res) => {
+    if(req.url.includes('?')) {
+      let firstName = req.query.firstName
+      let lastName = req.query.lastName
+      let phoneNumber = req.query.phoneNumber
+      let email = req.query.email
+
+      let arr = contacts.filter(item => (!firstName || item.firstName === firstName) &&
+      (!lastName || item.lastName === lastName) &&
+      (!phoneNumber || item.phoneNumber === phoneNumber) &&
+      (!email || item.email === email)
+      )
+      
+      res.status(200).json(arr)
+    } else {
+      res.status(200).json(contacts)
+    }
+})
+
+/* post /api/v1/contacts */
+contactsRouter.post('/', (req, res) => {
+  let firstName = req.body.firstName
+  let lastName = req.body.lastName
+  let phoneNumber = req.body.phoneNumber
+  let email = req.body.email
+  let id = req.body.id
+
+  let new_contact = new Contact(firstName, lastName, phoneNumber, email, id)
+
+  let isValidated = validateContactInfo(new_contact.firstName, new_contact.lastName, 
+    new_contact.phoneNumber, new_contact.email, new_contact.id)
+
+  if(isValidated) {
+    contacts.push(new_contact)
+    res.status(201).json({status: 'successfully added contact'})
+  } else {
+    res.status(500).json({status: 'failed validations on contact resource'})
+  }
+})
+
+/* get /api/v1/contacts/:id */
+contactsRouter.get('/:id', (req, res) => {
+  let getId = Number(req.params.id)
+  let findContact = false
+
+
+  contacts.filter(item => item.id === getId).
+  forEach(item => {
+      findContact = true 
+      res.status(200).json(item)
+    })
+
+  if(!findContact) {
+    res.status(404).json({error: 'the resource was not found'}) 
+  }
+  
+})
+
+/* put /api/v1/contacts/:id */
+contactsRouter.put('/:id', (req, res) => {
+  let getId = Number(req.params.id)
+  let findContact = false
+
+  contacts.filter(item => item.id === getId).
+  forEach(item => {
+      findContact = true
+      item.firstName = req.body.firstName
+      item.lastName = req.body.lastName
+      item.phoneNumber = req.body.phoneNumber
+      item.email = req.body.email
+      item.id = req.body.id
+      res.status(201).json(item)
+    })
+
+  if(!findContact) {
+    res.status(404).json({error: 'unable to update resource'}) 
+  }
+  
+})
+
+/* delete /api/v1/contacts/:id */
+contactsRouter.delete('/:id', (req, res) => {
+  let getId = Number(req.params.id)
+  let findContact = false
+  let idx = 0
+  
+  for(contact of contacts) {
+    if(contact.id === getId) {
+      findContact = true
+      let deleted_contact = contacts.splice(idx, 1)
+      res.status(201).json(deleted_contact)
+      break
+    }
+    idx++
+  }
+
+  if(!findContact) {
+    res.status(404).json({error: 'resource not found'}) 
+  }
+  
+})
+
+
 contactsRouter.get('/heartbeat', (req, res) => {
   console.log(req);
   console.log("request received for /api/v1/contants/heartbeat");
   res.status(200).json({status: "service is up and running"});
 });
+
 module.exports = contactsRouter;
