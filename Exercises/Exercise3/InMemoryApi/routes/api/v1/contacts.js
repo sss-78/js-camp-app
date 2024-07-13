@@ -59,12 +59,12 @@ let contacts = [];
 
 function validateContactInfo(firstName, lastName, phoneNumber, email, id) {
   return firstName.length <= 20 && lastName.length <= 20 && 
-  phoneNumber.charAt(3) === '-' && phoneNumber.charAt(7) == '-' && phoneNumber.length === 12 &&
-  email.charAt(4) == '@' && email.endsWith('.com') && email.length === 13 &&
+  (phoneNumber.match(/-/g)).length === 2 &&
+  email.includes('@') && email.endsWith('.com') &&
   !isNaN(id)
 }
 
-/* get /api/v1/contacts and /api/v1/contacts?firstName=Sally&lastName=Vance */
+/* get /api/v1/contacts and /api/v1/contacts?firstName=foo&lastName=bar */
 contactsRouter.get('/', (req, res) => {
     if(req.url.includes('?')) {
       let firstName = req.query.firstName
@@ -96,8 +96,10 @@ contactsRouter.post('/', (req, res) => {
 
   let isValidated = validateContactInfo(new_contact.firstName, new_contact.lastName, 
     new_contact.phoneNumber, new_contact.email, new_contact.id)
+  
+  let post_id = contacts.filter(item => item.id === id)
 
-  if(isValidated) {
+  if(isValidated && post_id.length === 0) {
     contacts.push(new_contact)
     res.status(201).json({status: 'successfully added contact'})
   } else {
