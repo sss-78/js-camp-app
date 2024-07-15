@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>JS Example</title>
+  </head>
+  <body>
+    <h1>Check console for results (promise-based example)</h1>
+    <script>
+      console.log("beginning of script");
+      function asyncFuncPromise() {
+        const promise = new Promise((resolve, reject) => {
+          console.log("Beginning of promise constructor");
+          const timeInMilliSeconds = 2000;
+          /* Using setTimeout to create asynch task */
+          setTimeout(() => {
+            console.log("inside settimeout callback");
+            let answer = Math.floor(Math.random() * 20);
+            if (answer >= 10) {
+              answer = `Correct value ${answer} generated`;
+              resolve(answer);
+            } else {
+              reject(new Error("Invalid value generated"));
+            }
+          }, timeInMilliSeconds);
+        });
+         setTimeout(() => {
+          console.log("inside second async callback");
+         }, 2000); 
+        console.log("end of promise constructor");  
+        return promise;
+      }
+      console.log("about to invoke asyncFuncPromise");
+      const promise = asyncFuncPromise();
+      // promise.then(
+      //   (result) => console.log(result),
+      //   (error) => console.error(error)
+      // );
+      promise
+        .then(result => {
+          console.log(result)
+          return "second promise in chain"
+        })
+        .then(msg => console.log(msg))
+        .catch(error => console.error(error))
+    </script>
+  </body>
+</html>
