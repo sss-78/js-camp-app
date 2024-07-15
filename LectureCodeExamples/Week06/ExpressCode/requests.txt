@@ -1,0 +1,14 @@
+GET http://localhost:8001/hello 
+
+### 
+
+POST http://localhost:8001 
+
+###  
+
+PUT http://localhost:8001
+
+### 
+
+DELETE http://localhost:8001
+
