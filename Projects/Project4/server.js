@@ -48,6 +48,42 @@ app.get("/data", (req, res) => {
   res.json({firstName: "Nikola", lastName: "Tesla"})
 })
 
+
+app.get("/apply", (request, response) => {
+  values = {
+    homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
+    api: `http://localhost:${portNumber}`
+  };
+  response.render("application", values);
+});
+
+app.get("/reviewApplication", (request, response) => {
+  values = {
+    homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
+    api: `http://localhost:${portNumber}`
+  };
+  response.render("review", values);
+});
+
+app.get("/adminGPA", (request, response) => {
+  values = {
+    homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
+    api: `http://localhost:${portNumber}`
+  };
+  response.render("gpa", values);
+});
+
+app.get("/adminRemove", (request, response) => {
+  values = {
+    homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
+    api: `http://localhost:${portNumber}`
+  };
+  response.render("remove", values);
+});
+
+
+
+
 app.listen(portNumber);
 console.log(`Web server started and running at http://localhost:${portNumber}`);
 commandLineInterpreter();

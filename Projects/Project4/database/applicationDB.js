@@ -35,20 +35,59 @@ class ApplicationDB {
 
     async insertApplication(application) {
         //TODO connect to database and insert application into collection in database
+        await this.connect();
+        const result = await this.#client.db(this.#dbName).collection(this.#collection).insertOne(application);
+        console.log(`Application entry created with id ${result.insertedId}`);
+
+        const applicants = 
+        await this.#client.db(this.#dbName).collection(this.#collection).find({}).toArray();
+
+        console.log('Applicants:', applicants);
     }
 
     async lookUpApplication(email) {
+        await this.connect();
         //TODO connect to database and return all applications that meet the criteria
+        let filter = {email : email}
 
+        const result = await this.#client.db(this.#dbName).collection(this.#collection).find(filter).toArray()
+
+        if(result) {
+            // console.log(result)
+            return result
+        } else {
+            // console.log('not found')
+            return []
+        }
     }
 
-
     async lookUpGPA(gpa) {
+        await this.connect();
         //TODO connect to database and return all applications that meet the criteria
+        let filter = {gpa : {$gte: gpa}}
+        const result = await this.#client.db(this.#dbName).collection(this.#collection).find(filter).toArray()
+
+        if(result) {
+            // console.log(result)
+            return result
+        } else {
+            console.log('not found')
+            return []
+        }
     }
 
     async deleteAllApplications() {
        //TODO connect to database and remove all applications in collection
+        try {
+            await this.connect();
+            const result = await this.#client.db(this.#dbName).collection(this.#collection).deleteMany({});
+            console.log(`Deleted applicants ${result.deletedCount}`);
+            return result.deletedCount
+        } catch (e) {
+            console.error(e);
+        } finally {
+            await this.#client.close();
+        }
     }
 }
 
