@@ -13,14 +13,8 @@ export default function List() {
 				name: itemName
 			}
 		]);
-		console.log("inside handler");
-		console.log(`items is: ${items}`);
-		console.log(`itemName is: ${itemName}`);
 		setItemName("");
 	};
-	console.log("outside handler before return");
-	console.log(`items is: ${items}`);
-	console.log(`itemName is: ${itemName}`);
 	return (
 		<>
 			<h1>Example of useState hook with an array of objects and a string</h1>
