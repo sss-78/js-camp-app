@@ -8,7 +8,7 @@ const bodyParser = require("body-parser"); /* To handle post parameters */
 const path = require("path");
 const { ApplicationDB } = require("./database/applicationDB");
 const { render } = require("express/lib/response");
-const applicationRouter  = require("./routes/api/v1/application")
+const applicationRouter = require("./routes/api/v1/application")
 const app = express(); /* app is a request handler function */
 process.stdin.setEncoding("utf8");
 const portNumber = Number(process.argv[2]);
@@ -19,6 +19,7 @@ app.set("view engine", "ejs");
 
 /* Initializes request.body with post information */
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 /* applicationDB */
 const applicationDB = new ApplicationDB();
@@ -29,9 +30,9 @@ app.use("/api/v1", applicationRouter)
 app.get("/", (request, response) => {
   (async () => {
     await applicationDB.listDatabases();
-  })(); 
-  response.render("index");
-});
+  })()
+  response.render("index")
+})
 
 app.get("/sample", (request, response) => {
   values = {
@@ -39,24 +40,26 @@ app.get("/sample", (request, response) => {
     firstName: 'Nikola',
     lastName: 'Tesla',
     api: `http://localhost:${portNumber}`
-  };
+  }
 
-  response.render("sample", values);
-});
+  response.render("sample", values)
+})
 
 app.get("/data", (req, res) => {
-  res.json({firstName: "Nikola", lastName: "Tesla"})
+  res.json({ firstName: "Nikola", lastName: "Tesla" })
 })
 
 
+/* Application Page */
 app.get("/apply", (request, response) => {
   values = {
     homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
     api: `http://localhost:${portNumber}`
-  };
+  }
   response.render("application", values);
-});
+})
 
+/* Review Application Page */
 app.get("/reviewApplication", (request, response) => {
   values = {
     homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
@@ -65,21 +68,23 @@ app.get("/reviewApplication", (request, response) => {
   response.render("review", values);
 });
 
+/* Select by GPA Page */
 app.get("/adminGPA", (request, response) => {
   values = {
     homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
     api: `http://localhost:${portNumber}`
-  };
-  response.render("gpa", values);
-});
+  }
+  response.render("gpa", values)
+})
 
+/* Remove all Applications Page */
 app.get("/adminRemove", (request, response) => {
   values = {
     homeUrl: `<a href="http://localhost:${portNumber}/">HOME</a>`,
     api: `http://localhost:${portNumber}`
-  };
-  response.render("remove", values);
-});
+  }
+  response.render("remove", values)
+})
 
 
 
